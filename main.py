@@ -12,7 +12,7 @@ def main():
         tutoriel = ClidleTutorial(fake_files)
         tutoriel.run()
 
-    print("\\n🖥️ Bienvenue dans Clidle. Tapez 'help' pour afficher les commandes.")
+    print("🖥️ Bienvenue dans Clidle. Tapez 'help' pour afficher les commandes.")
     cli = ClidleCLI()
     cli.fake_files = fake_files  # Injecte les fichiers du tutoriel
     cli.run()

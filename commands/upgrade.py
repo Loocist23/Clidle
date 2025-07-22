@@ -14,7 +14,7 @@ UPGRADES = [
 ]
 
 def run(args, cli):
-    state = cli.state  # raccourci
+    state = cli.get_active_state()
 
     print("\n🔧 Améliorations disponibles :\n")
 
