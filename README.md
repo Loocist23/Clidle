@@ -70,7 +70,7 @@ while True {
 
 ## 🧑‍💻 Auteur
 
-Développé par Anthony Zegnal (alias [Loocist23](https://github.com/Loocist23)) – Créateur de jeux, dév full-stack & bidouilleur passionné.
+Développé par [Loocist23](https://github.com/Loocist23) – Créateur de jeux, dév full-stack & bidouilleur passionné.
 
 ---
 
