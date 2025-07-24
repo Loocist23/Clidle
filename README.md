@@ -13,6 +13,7 @@ Vous commencez avec un fichier `money.cl` vide. Après un petit tutoriel interac
 ```cl
 while True:
     makeMoney()
+    upgrade()
 ```
 
 Et là, tout commence...
@@ -24,6 +25,7 @@ money.cl
 main> cat money.cl
 while True:
     makeMoney()
+    upgrade()
 
 main> run money.cl
 💰 +0.01$
@@ -41,7 +43,7 @@ Améliorez votre machine, débloquez des commandes (`nmap`, `ssh`, `upgrade`, et
 ✅ Tutoriel interactif au premier lancement  
 ✅ Commandes simulées : `ls`, `cat`, `edit`, `run`, `idle`, `create`, `shop`, `ssh`, `exit`, `upgrade`...
 ✅ Système de fichiers virtuel par utilisateur  
-✅ Scripts personnalisables en ClidleScript (`makeMoney()` etc.)  
+✅ Scripts personnalisables en ClidleScript (`makeMoney()`, `upgrade()` etc.)
 ✅ Gain d'argent automatisé avec `power` (vitesse) et `gain` (revenu par appel)  
 ✅ Machines virtuelles distantes accessibles via `ssh <nom>`  
 ✅ Boutique pour débloquer de nouvelles commandes et acheter du matériel  
