@@ -41,7 +41,7 @@ Améliorez votre machine, débloquez des commandes (`nmap`, `ssh`, `upgrade`, et
 
 ✅ Terminal sandboxé sécurisé (aucune commande système réelle)  
 ✅ Tutoriel interactif au premier lancement  
-✅ Commandes simulées : `ls`, `cat`, `edit`, `run`, `idle`, `create`, `shop`, `ssh`, `exit`, `upgrade`...
+✅ Commandes simulées : `ls`, `cat`, `edit`, `run`, `idle`, `jobs`, `stop`, `create`, `shop`, `ssh`, `exit`, `upgrade`...
 ✅ Système de fichiers virtuel par utilisateur  
 ✅ Scripts personnalisables en ClidleScript (`makeMoney()`, `upgrade()` etc.)
 ✅ Gain d'argent automatisé avec `power` (vitesse) et `gain` (revenu par appel)  
@@ -97,6 +97,8 @@ python main.py
 | `edit`         | Modifie un fichier texte                         |
 | `run`          | Exécute un script `.cl` (ex: `money.cl`)         |
 | `idle`         | Lance un script en tâche de fond                 |
+| `jobs`         | Liste les scripts lancés avec `idle`             |
+| `stop <id>`    | Arrête un script en arrière-plan                 |
 | `create`       | Crée un nouveau script `.cl`                     |
 | `shop`         | Ouvre la boutique pour acheter des améliorations|
 | `ssh <nom>`    | Accède à une machine distante                    |

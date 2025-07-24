@@ -12,7 +12,9 @@ class ClidleCLI:
         self.home_path = os.path.join(os.path.dirname(__file__), "home")
         os.makedirs(self.home_path, exist_ok=True)
 
-        self.background_threads = []
+        # Gestion des scripts lancés en arrière-plan
+        self.background_tasks = {}
+        self.task_counter = 0
 
         self.state = GameState()
         self.state_path = os.path.join(self.home_path, "save.json")

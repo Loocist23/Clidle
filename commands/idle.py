@@ -23,6 +23,17 @@ def run(args, cli):
     is_loop = any("while True:" in l for l in lines)
     instructions = [l for l in lines if l != "while True:" and not l.startswith("#")]
 
+    make_money_count = sum(1 for l in instructions if l.startswith("makeMoney("))
+    if make_money_count > 1:
+        print("⚠️ makeMoney() est appelé plusieurs fois, une seule exécution sera prise en compte")
+        first_index = next(i for i, l in enumerate(instructions) if l.startswith("makeMoney("))
+        # remove further occurrences
+        instructions = [instr for i, instr in enumerate(instructions) if not (instr.startswith("makeMoney(") and i != first_index)]
+
+    if make_money_count >= 1 and any(t["has_money"] for t in cli.background_tasks.values()):
+        print("❌ Un script utilisant makeMoney() tourne déjà en arrière-plan")
+        return
+
     def execute_instructions():
         for line in instructions:
             if "(" in line and line.endswith(")"):
@@ -37,9 +48,9 @@ def run(args, cli):
             else:
                 print(f"⚠️ Ligne ignorée : {line}")
 
-    def loop():
+    def loop(stop_event):
         if is_loop:
-            while cli.running:
+            while cli.running and not stop_event.is_set():
                 execute_instructions()
                 cli.state.save()
                 time.sleep(1 / cli.state.power)
@@ -47,7 +58,14 @@ def run(args, cli):
             execute_instructions()
             cli.state.save()
 
-    thread = threading.Thread(target=loop, daemon=True)
+    stop_event = threading.Event()
+    thread = threading.Thread(target=loop, args=(stop_event,), daemon=True)
     thread.start()
-    cli.background_threads.append(thread)
-    print(f"🟢 Script {filename} exécuté en arrière-plan.")
+    cli.task_counter += 1
+    cli.background_tasks[cli.task_counter] = {
+        "thread": thread,
+        "stop": stop_event,
+        "name": filename,
+        "has_money": make_money_count >= 1,
+    }
+    print(f"🟢 Script {filename} exécuté en arrière-plan avec l'ID {cli.task_counter}.")

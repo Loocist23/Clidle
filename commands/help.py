@@ -11,6 +11,8 @@ def run(args, cli):
     print("  edit   → Permet de modifier un fichier")
     print("  run    → Exécute un script (.cl)")
     print("  idle   → Lance un script en tâche de fond")
+    print("  jobs   → Liste les scripts en arrière-plan")
+    print("  stop   → Arrête un script lancé avec 'idle'")
     print("  create → Crée un nouveau script .cl")
     print("  shop   → Ouvre la boutique pour acheter des outils")
     print("  exit   → Quitte le jeu")
