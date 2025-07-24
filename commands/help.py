@@ -10,6 +10,8 @@ def run(args, cli):
     print("  cat    → Affiche le contenu d’un fichier")
     print("  edit   → Permet de modifier un fichier")
     print("  run    → Exécute un script (.cl)")
+    print("  idle   → Lance un script en tâche de fond")
+    print("  create → Crée un nouveau script .cl")
     print("  shop   → Ouvre la boutique pour acheter des outils")
     print("  exit   → Quitte le jeu")
 

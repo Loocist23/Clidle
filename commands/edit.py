@@ -8,10 +8,21 @@ def run(args, cli):
     filename = args[0]
     path = os.path.join(cli.home_path, filename)
 
-    print("Entrez le contenu du fichier (terminez par une ligne vide) :")
+    existing = ""
+    if os.path.exists(path):
+        with open(path, "r", encoding="utf-8") as f:
+            existing = f.read()
+
+    print("(Éditeur simplifié — terminez par une ligne vide)")
+    if existing:
+        print(existing)
+
     lines = []
     while True:
-        line = input()
+        try:
+            line = input()
+        except EOFError:
+            break
         if line == "":
             break
         lines.append(line)
@@ -19,4 +30,4 @@ def run(args, cli):
     with open(path, "w", encoding="utf-8") as f:
         f.write("\n".join(lines))
 
-    print(f"{filename} modifié.")
+    print(f"{filename} sauvegardé.")

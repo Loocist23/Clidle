@@ -12,6 +12,8 @@ class ClidleCLI:
         self.home_path = os.path.join(os.path.dirname(__file__), "home")
         os.makedirs(self.home_path, exist_ok=True)
 
+        self.background_threads = []
+
         self.state = GameState()
         self.state_path = os.path.join(self.home_path, "save.json")
         self.state.load(path=self.state_path)
@@ -40,6 +42,8 @@ class ClidleCLI:
                 self.save_before_exit()
                 print("🔚 Déconnexion...")
                 self.running = False
+
+        self.save_before_exit()
 
     def execute_command(self, cmd, args):
         try:
