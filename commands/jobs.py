@@ -7,6 +7,9 @@ HELP = (
 
 
 def run(args, cli):
+    if "tool_idle" not in cli.state.inventory:
+        print("❌ Vous n'avez pas le module 'idle'. Achetez-le dans le shop.")
+        return
     if not cli.background_tasks:
         print("Aucun script en arrière-plan.")
         return
