@@ -24,6 +24,13 @@ SHOP_ITEMS = [
         "key": "tool_ssh",
         "desc": "Permet de se connecter à une machine via 'ssh <nom>'.",
         "cost": 10.00
+    },
+    {
+        "label": "Module Idle",
+        "key": "tool_idle",
+        "desc": "Autorise l'usage d'idle, jobs et stop pour lancer des scripts en arrière-plan.",
+        "cost": 50.00,
+        "unlock": 200.0
     }
 ]
 
@@ -32,7 +39,12 @@ def run(args, cli):
     state = cli.state
 
     print("\n🛍️ Boutique :\n")
-    for i, item in enumerate(SHOP_ITEMS, start=1):
+    available_items = [
+        it for it in SHOP_ITEMS
+        if it.get("unlock", 0) <= state.total_money_earned or it["key"] in state.inventory
+    ]
+
+    for i, item in enumerate(available_items, start=1):
         owned = "✅" if item["key"] in state.inventory else ""
         print(f"{i}. {item['label']} - {item['cost']:.2f}$ {owned}")
         print(f"   {item['desc']}")
@@ -49,11 +61,11 @@ def run(args, cli):
         return
 
     index = int(choice) - 1
-    if index < 0 or index >= len(SHOP_ITEMS):
+    if index < 0 or index >= len(available_items):
         print("❌ Numéro invalide.")
         return
 
-    item = SHOP_ITEMS[index]
+    item = available_items[index]
 
     if item["key"] in state.inventory and item["key"] != "vm_linux":
         print("📦 Vous possédez déjà cet objet.")
@@ -106,6 +118,8 @@ def run(args, cli):
     else:
         state.inventory.append(item["key"])
         print(f"✅ Vous avez acheté : {item['label']} !")
+        if item["key"] == "tool_idle":
+            print("Les commandes 'idle', 'jobs' et 'stop' sont maintenant disponibles.")
 
     print(f"💸 Solde restant : {state.balance:.2f}$")
     state.save()

@@ -10,6 +10,9 @@ HELP = (
 
 
 def run(args, cli):
+    if "tool_idle" not in cli.state.inventory:
+        print("❌ Vous n'avez pas le module 'idle'. Achetez-le dans le shop.")
+        return
     if not args:
         print("Utilisation : idle <nom_fichier>")
         return

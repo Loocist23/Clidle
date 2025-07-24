@@ -41,7 +41,9 @@ Améliorez votre machine, débloquez des commandes (`nmap`, `ssh`, `upgrade`, et
 
 ✅ Terminal sandboxé sécurisé (aucune commande système réelle)  
 ✅ Tutoriel interactif au premier lancement  
-✅ Commandes simulées : `ls`, `cat`, `edit`, `run`, `idle`, `jobs`, `stop`, `create`, `shop`, `ssh`, `exit`, `upgrade`...
+✅ Commandes simulées : `ls`, `cat`, `edit`, `run`, `create`, `shop`, `ssh`, `exit`, `upgrade`...
+✅ Module `idle` (et ses commandes `jobs`/`stop`) à acheter dans la boutique
+   (débloqué après avoir gagné 200$, coût de 50$)
 ✅ Système de fichiers virtuel par utilisateur  
 ✅ Scripts personnalisables en ClidleScript (`makeMoney()`, `upgrade()` etc.)
 ✅ Gain d'argent automatisé avec `power` (vitesse) et `gain` (revenu par appel)  
@@ -96,9 +98,9 @@ python main.py
 | `cat`          | Affiche le contenu d’un fichier                  |
 | `edit`         | Modifie un fichier texte                         |
 | `run`          | Exécute un script `.cl` (ex: `money.cl`)         |
-| `idle`         | Lance un script en tâche de fond                 |
-| `jobs`         | Liste les scripts lancés avec `idle`             |
-| `stop <id>`    | Arrête un script en arrière-plan                 |
+| `idle`         | Lance un script en tâche de fond (après achat)   |
+| `jobs`         | Liste les scripts lancés avec `idle` (après achat) |
+| `stop <id>`    | Arrête un script en arrière-plan (après achat)     |
 | `create`       | Crée un nouveau script `.cl`                     |
 | `shop`         | Ouvre la boutique pour acheter des améliorations|
 | `ssh <nom>`    | Accède à une machine distante                    |
