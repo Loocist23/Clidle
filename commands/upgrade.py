@@ -13,6 +13,11 @@ UPGRADES = [
     }
 ]
 
+HELP = (
+    "Améliore la puissance ou les gains de votre machine."\
+    "\nExemple : upgrade"
+)
+
 def run(args, cli):
     state = cli.get_active_state()
 

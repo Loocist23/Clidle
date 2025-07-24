@@ -1,5 +1,10 @@
 import threading
 
+HELP = (
+    "Liste les scripts en cours d'exécution en arrière-plan."\
+    "\nExemple : jobs"
+)
+
 
 def run(args, cli):
     if not cli.background_tasks:

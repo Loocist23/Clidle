@@ -1,5 +1,11 @@
 import os
 
+# Description utilisée par la commande "help".
+HELP = (
+    "Affiche le contenu d'un fichier."\
+    "\nExemple : cat script.cl"
+)
+
 def run(args, cli):
     if not args:
         print("Utilisation : cat <nom_fichier>")

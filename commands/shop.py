@@ -1,6 +1,11 @@
 import os
 import json
 
+HELP = (
+    "Affiche la boutique pour acheter outils et machines."\
+    "\nExemple : shop"
+)
+
 SHOP_ITEMS = [
     {
         "label": "Machine Linux v1",

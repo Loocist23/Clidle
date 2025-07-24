@@ -1,4 +1,27 @@
+import importlib
+
+HELP = (
+    "Affiche l'aide générale ou celle d'une commande."\
+    "\nExemple : help upgrade"
+)
+
+
 def run(args, cli):
+    if args:
+        cmd = args[0]
+        try:
+            module = importlib.import_module(f"commands.{cmd}")
+        except ModuleNotFoundError:
+            print(f"Commande inconnue : {cmd}")
+            return
+
+        doc = getattr(module, "HELP", None)
+        if doc:
+            print(doc)
+        else:
+            print(f"Aucune aide disponible pour la commande '{cmd}'.")
+        return
+
     state = cli.state
     inventory = state.inventory
 

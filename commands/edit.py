@@ -1,5 +1,10 @@
 import os
 
+HELP = (
+    "Édite un fichier ligne par ligne."\
+    "\nExemple : edit monscript.cl"
+)
+
 def run(args, cli):
     if not args:
         print("Utilisation : edit <nom_fichier>")

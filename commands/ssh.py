@@ -3,6 +3,11 @@ import os
 import json
 from game_state import GameState
 
+HELP = (
+    "Connexion à une machine distante via SSH."\
+    "\nExemple : ssh ma_vm"
+)
+
 def run(args, cli):
     if "tool_ssh" not in cli.state.inventory:
         print("❌ Vous n'avez pas la commande 'ssh'. Achetez-la dans le shop.")
