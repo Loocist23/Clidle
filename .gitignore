@@ -53,3 +53,5 @@ coverage.xml
 *.json
 
 .tutorial_done
+
+/home/remote_*/
