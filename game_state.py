@@ -1,7 +1,10 @@
 import os
 import json
 
-SAVE_PATH = os.path.join(os.path.dirname(__file__), "save.json")
+# Par défaut, toutes les sauvegardes se trouvent dans le dossier
+# ``home`` à la racine du projet. Cela évite la création accidentelle
+# d'un fichier ``save.json`` supplémentaire à la racine du dépôt.
+SAVE_PATH = os.path.join(os.path.dirname(__file__), "home", "save.json")
 
 
 class GameState:
