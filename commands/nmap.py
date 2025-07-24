@@ -1,3 +1,8 @@
+HELP = (
+    "Scanne le réseau local (si vous possédez l'outil)."\
+    "\nExemple : nmap"
+)
+
 def run(args, cli):
     if "tool_nmap" not in cli.state.inventory:
         print("❌ Vous n'avez pas la commande 'nmap'. Achetez-la dans le shop.")

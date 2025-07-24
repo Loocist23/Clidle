@@ -1,5 +1,10 @@
 import threading
 
+HELP = (
+    "Arrête un script lancé avec idle."\
+    "\nExemple : stop 1"
+)
+
 
 def run(args, cli):
     if not args:

@@ -1,5 +1,10 @@
 import os
 
+HELP = (
+    "Crée un nouveau script .cl."\
+    "\nExemple : create monscript.cl"
+)
+
 
 def run(args, cli):
     if not args:

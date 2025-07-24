@@ -2,6 +2,11 @@ import os
 import time
 import importlib
 
+HELP = (
+    "Exécute un script .cl."\
+    "\nExemple : run monscript.cl"
+)
+
 def run(args, cli):
     if not args:
         print("Utilisation : run <nom_fichier>")

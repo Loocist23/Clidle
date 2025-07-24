@@ -3,6 +3,11 @@ import importlib
 import time
 import threading
 
+HELP = (
+    "Exécute un script en tâche de fond."\
+    "\nExemple : idle monscript.cl"
+)
+
 
 def run(args, cli):
     if not args:
