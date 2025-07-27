@@ -1,8 +1,8 @@
 import importlib
 
 HELP = (
-    "Affiche l'aide générale ou celle d'une commande."\
-    "\nExemple : help upgrade"
+    "Display general help or help for a command."\
+    "\nExample: help upgrade"
 )
 
 
@@ -12,44 +12,44 @@ def run(args, cli):
         try:
             module = importlib.import_module(f"commands.{cmd}")
         except ModuleNotFoundError:
-            print(f"Commande inconnue : {cmd}")
+            print(f"Unknown command: {cmd}")
             return
 
         doc = getattr(module, "HELP", None)
         if doc:
             print(doc)
         else:
-            print(f"Aucune aide disponible pour la commande '{cmd}'.")
+            print(f"No help available for the command '{cmd}'.")
         return
 
     state = cli.state
     inventory = state.inventory
 
-    print("Commandes disponibles :")
+    print("Available commands:")
 
-    # Commandes de base
-    print("  help   → Affiche cette aide")
-    print("  ls     → Liste les fichiers disponibles")
-    print("  cat    → Affiche le contenu d’un fichier")
-    print("  edit   → Permet de modifier un fichier")
-    print("  run    → Exécute un script (.cl)")
+    # Basic commands
+    print("  help   → Display this help")
+    print("  ls     → List available files")
+    print("  cat    → Show file contents")
+    print("  edit   → Edit a file")
+    print("  run    → Execute a .cl script")
     if "tool_idle" in inventory:
-        print("  idle   → Lance un script en tâche de fond")
-        print("  jobs   → Liste les scripts en arrière-plan")
-        print("  stop   → Arrête un script lancé avec 'idle'")
+        print("  idle   → Run a script in the background")
+        print("  jobs   → List background scripts")
+        print("  stop   → Stop a script launched with 'idle'")
     else:
-        print("  idle/jobs/stop → Achetez le module Idle dans le shop")
-    print("  create → Crée un nouveau script .cl")
-    print("  shop   → Ouvre la boutique pour acheter des outils")
-    print("  exit   → Quitte le jeu")
+        print("  idle/jobs/stop → Buy the Idle module in the shop")
+    print("  create → Create a new .cl script")
+    print("  shop   → Open the shop to buy tools")
+    print("  exit   → Quit the game")
 
-    # Commande débloquée par total d'argent
+    # Command unlocked by total money earned
     if state.total_money_earned >= 5:
-        print("  upgrade → Améliore votre PC (débloqué à 5$)")
+        print("  upgrade → Upgrade your PC (unlocked at $5)")
 
-    # Commandes achetées dans le shop
+    # Commands purchased from the shop
     if "tool_nmap" in inventory:
-        print("  nmap   → Scan du réseau local (nécessite achat dans le shop)")
+        print("  nmap   → Scan the local network (requires shop purchase)")
 
     if "tool_ssh" in inventory:
-        print("  ssh    → Connexion à une machine distante (via 'ssh nom')")
+        print("  ssh    → Connect to a remote machine (via 'ssh name')")

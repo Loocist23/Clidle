@@ -2,19 +2,19 @@ import os
 from cli import ClidleCLI
 from tutorial import ClidleTutorial, TUTORIAL_FLAG
 
-# Simulation d'un système de fichiers de jeu
+# Simulated game file system
 fake_files = {
     "money.cl": ""
 }
 
 def main():
     if not os.path.exists(TUTORIAL_FLAG):
-        tutoriel = ClidleTutorial(fake_files)
-        tutoriel.run()
+        tutorial = ClidleTutorial(fake_files)
+        tutorial.run()
 
-    print("🖥️ Bienvenue dans Clidle. Tapez 'help' pour afficher les commandes.")
+    print("🖥️ Welcome to Clidle. Type 'help' to show the commands.")
     cli = ClidleCLI()
-    cli.fake_files = fake_files  # Injecte les fichiers du tutoriel
+    cli.fake_files = fake_files  # Inject tutorial files
     cli.run()
 
 if __name__ == "__main__":

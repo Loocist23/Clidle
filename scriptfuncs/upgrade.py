@@ -15,7 +15,7 @@ UPGRADES = [
 ]
 
 def run(cli, *args):
-    """Achète automatiquement les améliorations si les fonds sont suffisants."""
+    """Automatically purchase upgrades if enough funds are available."""
     purchased = False
     for upgrade in UPGRADES:
         if cli.state.balance >= upgrade["cost"]:
@@ -31,4 +31,4 @@ def run(cli, *args):
             with open(save_path, "w", encoding="utf-8") as f:
                 json.dump(cli.state.__dict__, f, indent=2)
         except Exception as e:
-            print(f"⚠️ Erreur de sauvegarde dans {save_path} : {e}")
+            print(f"⚠️ Error saving to {save_path}: {e}")

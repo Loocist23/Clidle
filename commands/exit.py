@@ -1,12 +1,12 @@
 HELP = (
-    "Quitte le jeu ou la machine distante."\
-    "\nExemple : exit"
+    "Quit the game or disconnect from the remote machine."\
+    "\nExample: exit"
 )
 
 def run(args, cli):
     if cli.remote_name:
-        print("↩️ Déconnexion de la machine distante.")
+        print("↩️ Disconnecting from the remote machine.")
         cli.remote_name = None
     else:
-        print("Au revoir.")
+        print("Goodbye.")
         cli.running = False

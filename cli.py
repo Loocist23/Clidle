@@ -12,7 +12,7 @@ class ClidleCLI:
         self.home_path = os.path.join(os.path.dirname(__file__), "home")
         os.makedirs(self.home_path, exist_ok=True)
 
-        # Gestion des scripts lancés en arrière-plan
+        # Background tasks management
         self.background_tasks = {}
         self.task_counter = 0
 
@@ -34,15 +34,15 @@ class ClidleCLI:
                 print()
                 self.save_before_exit()
                 if self.remote_name:
-                    print(f"🔌 Interruption — déconnexion de la VM {self.remote_name}...\n")
+                    print(f"🔌 Interrupted — disconnecting from VM {self.remote_name}...\n")
                 else:
-                    print("🛑 Interruption du programme principal (Ctrl+C)")
+                    print("🛑 Main program interrupted (Ctrl+C)")
                 self.running = False
 
             except EOFError:
                 print()
                 self.save_before_exit()
-                print("🔚 Déconnexion...")
+                print("🔚 Disconnecting...")
                 self.running = False
 
         self.save_before_exit()
@@ -52,12 +52,12 @@ class ClidleCLI:
             module = importlib.import_module(f"commands.{cmd}")
             module.run(args, self)
         except ModuleNotFoundError:
-            print(f"Commande inconnue : '{cmd}' (tapez 'help')")
+            print(f"Unknown command: '{cmd}' (type 'help')")
         except Exception as e:
-            print(f"❌ Erreur pendant l'exécution de la commande : {e}")
+            print(f"❌ Error while executing command: {e}")
 
     def save_before_exit(self):
-        """Sauvegarde l'état courant (VM ou main) avant de quitter"""
+        """Save the current state (VM or main) before exiting"""
         try:
             if self.remote_name:
                 save_path = os.path.join(self.home_path, "save.json")
@@ -66,7 +66,7 @@ class ClidleCLI:
             with open(save_path, "w", encoding="utf-8") as f:
                 json.dump(self.state.__dict__, f, indent=2)
         except Exception as e:
-            print(f"⚠️ Erreur de sauvegarde avant de quitter : {e}")
+            print(f"⚠️ Error while saving before exit: {e}")
 
     def get_active_state(self):
         if self.remote_name is None:
@@ -87,5 +87,5 @@ class ClidleCLI:
                 state.__dict__.update(data)
                 return state
         except Exception:
-            print(f"⚠️ Impossible de charger l'état de {name}.")
+            print(f"⚠️ Unable to load the state of {name}.")
             return GameState()
