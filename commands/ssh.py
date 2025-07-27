@@ -41,7 +41,11 @@ def run(args, cli):
             f.write("# Default script\nwhile True:\n    makeMoney()")
     
     session.remote_name = name
+
     session.run()
+
+    # Reload main state in case the VM modified it (e.g., syncmoney)
+    cli.state.load(path=cli.state_path)
 
     # Update the state in memory
     machine["state"] = session.state.__dict__.copy()
