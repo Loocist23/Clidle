@@ -42,6 +42,8 @@ def run(args, cli):
     print("  create → Create a new .cl script")
     print("  shop   → Open the shop to buy tools")
     print("  exit   → Quit the game")
+    if state.under_attack:
+        print("  defend → Attempt to repel the current AI attack")
 
     # Command unlocked by total money earned
     if state.total_money_earned >= 5:

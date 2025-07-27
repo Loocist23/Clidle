@@ -105,6 +105,7 @@ python main.py
 | `shop`         | Open the shop to buy upgrades                      |
 | `ssh <name>`   | Connect to a remote machine                        |
 | `upgrade`      | Improve your speed or gains                        |
+| `defend`       | Repel a dissident AI attack                        |
 | `exit`         | Leave the terminal or current VM                   |
 
 ---

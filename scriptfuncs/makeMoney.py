@@ -1,9 +1,17 @@
 import os
 import json
+from ai_events import trigger_ai_attack
 
 def run(cli, *args):
-    cli.state.balance += cli.state.income_per_call
-    cli.state.total_money_earned += cli.state.income_per_call
+    state = cli.state
+    if state.under_attack:
+        return
+
+    state.balance += state.income_per_call
+    state.total_money_earned += state.income_per_call
+
+    if state.total_money_earned >= state.next_attack_at:
+        trigger_ai_attack(cli)
 
     if cli.remote_name:
         # VM → home/remote_<name>/save.json
