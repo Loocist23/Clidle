@@ -1,6 +1,8 @@
 import importlib
 import os
 import json
+import sys
+from pathlib import Path
 from game_state import GameState
 
 
@@ -9,7 +11,17 @@ class ClidleCLI:
     def __init__(self):
         self.running = True
         self.remote_name = None
-        self.home_path = os.path.join(os.path.dirname(__file__), "home")
+
+        # Determine a persistent base directory for saves
+        if getattr(sys, "frozen", False):
+            base_dir = Path(sys.executable).resolve().parent
+        else:
+            try:
+                base_dir = Path(sys.argv[0]).resolve().parent
+            except Exception:
+                base_dir = Path(__file__).resolve().parent
+
+        self.home_path = str(base_dir / "home")
         os.makedirs(self.home_path, exist_ok=True)
 
         # Background tasks management

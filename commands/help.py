@@ -48,6 +48,8 @@ def run(args, cli):
     # Command unlocked by total money earned
     if state.total_money_earned >= 5:
         print("  upgrade → Upgrade your PC (unlocked at $5)")
+    if state.total_money_earned >= 100:
+        print("  syncmoney → Sync money from a VM to main (unlocked at $100)")
 
     # Commands purchased from the shop
     if "tool_nmap" in inventory:

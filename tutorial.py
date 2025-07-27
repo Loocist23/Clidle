@@ -10,7 +10,14 @@ class ClidleTutorial:
 
     def run(self):
         print("🎓 Welcome to the Clidle tutorial!")
-        print("This tutorial will guide you through the basics. Let's begin.")
+        print(
+            "In this near future, megacorporations and rogue AIs fight a silent "
+            "war for control of the networks."
+        )
+        print(
+            "Your secure terminal is your entry point into this world. Let's "
+            "start with the basic commands."
+        )
 
         # Step 1: require help
         while True:
@@ -57,6 +64,10 @@ class ClidleTutorial:
                 if "makeMoney()" in content:
                     self.fake_files["money.cl"] = content
                     print("File saved successfully.")
+                    print(
+                        "These first lines will generate enough credits to catch "
+                        "the attention of Clidle's factions."
+                    )
                     break
                 else:
                     print("⚠️ You must include 'makeMoney()' in the file.")
@@ -83,8 +94,14 @@ class ClidleTutorial:
             else:
                 print("Type 'run money.cl' to continue.")
 
+        print(
+            "\nYour first profits are modest, but they already open the gates "
+            "to Clidle's universe."
+        )
+
         # End of tutorial
         print("\n🎉 Congratulations, you have completed the tutorial!")
+        print("The network is waiting for you.")
         choice = input("Would you like to see this tutorial again next launch? (y/n) ").strip().lower()
         if choice == "n":
             with open(TUTORIAL_FLAG, "w") as f:
