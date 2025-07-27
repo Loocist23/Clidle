@@ -15,6 +15,10 @@ class GameState:
         self.total_money_earned = 0.0
         self.inventory = []
         self.machines = []
+        # AI attack system
+        self.under_attack = False
+        self.attack_level = 0
+        self.next_attack_at = 50.0
 
     @classmethod
     def from_dict(cls, data):
@@ -25,6 +29,9 @@ class GameState:
         state.total_money_earned = data.get("total_money_earned", 0.0)
         state.inventory = data.get("inventory", [])
         state.machines = data.get("machines", [])
+        state.under_attack = data.get("under_attack", False)
+        state.attack_level = data.get("attack_level", 0)
+        state.next_attack_at = data.get("next_attack_at", 50.0)
         return state
 
     def load(self, path=SAVE_PATH):
