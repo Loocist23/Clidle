@@ -122,8 +122,7 @@ python main.py
 
 ## 🧑‍💻 Developer
 
-👤 **Anthony Zegnal**
-Alias [Loocist23](https://github.com/Loocist23)
+[Loocist23](https://github.com/Loocist23)
 Fullstack developer, script tinkerer and game creator 🛠️
 
 ---
