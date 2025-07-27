@@ -1,27 +1,27 @@
 import os
 
 HELP = (
-    "Crée un nouveau script .cl."\
-    "\nExemple : create monscript.cl"
+    "Create a new .cl script."\
+    "\nExample: create myscript.cl"
 )
 
 
 def run(args, cli):
     if not args:
-        print("Utilisation : create <nom_script.cl>")
+        print("Usage: create <script_name.cl>")
         return
 
     filename = args[0]
     if not filename.endswith('.cl'):
-        print("❌ Seuls les scripts .cl peuvent être créés")
+        print("❌ Only .cl scripts can be created")
         return
 
     path = os.path.join(cli.home_path, filename)
     if os.path.exists(path):
-        print(f"⚠️ Le fichier {filename} existe déjà")
+        print(f"⚠️ File {filename} already exists")
         return
 
     with open(path, 'w', encoding='utf-8') as f:
-        f.write('# Nouveau script Clidle\n')
+        f.write('# New Clidle script\n')
 
-    print(f"📄 Fichier {filename} créé")
+    print(f"📄 File {filename} created")

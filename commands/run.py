@@ -3,20 +3,20 @@ import time
 import importlib
 
 HELP = (
-    "Exécute un script .cl."\
-    "\nExemple : run monscript.cl"
+    "Execute a .cl script."\
+    "\nExample: run myscript.cl"
 )
 
 def run(args, cli):
     if not args:
-        print("Utilisation : run <nom_fichier>")
+        print("Usage: run <filename>")
         return
 
     filename = args[0]
     path = os.path.join(cli.home_path, filename)
 
     if not os.path.exists(path):
-        print(f"Fichier introuvable : {filename}")
+        print(f"File not found: {filename}")
         return
 
     with open(path, "r", encoding="utf-8") as f:
@@ -34,16 +34,16 @@ def run(args, cli):
                     module = importlib.import_module(f"scriptfuncs.{func_name}")
                     module.run(cli)
                 except ModuleNotFoundError:
-                    print(f"❌ Fonction inconnue : {func_name}")
+                    print(f"❌ Unknown function: {func_name}")
                 except Exception as e:
-                    print(f"❌ Erreur dans {func_name} : {e}")
+                    print(f"❌ Error in {func_name}: {e}")
             else:
-                print(f"⚠️ Ligne ignorée : {line}")
+                print(f"⚠️ Ignored line: {line}")
 
     state = cli.state
 
     if is_loop:
-        print("▶️ Exécution du script (Ctrl+C pour arrêter)")
+        print("▶️ Running script (Ctrl+C to stop)")
         try:
             while True:
                 execute_instructions()
@@ -51,8 +51,8 @@ def run(args, cli):
                 state.save()
                 time.sleep(1 / state.power)
         except KeyboardInterrupt:
-            print("\n⏹️ Script arrêté.")
+            print("\n⏹️ Script stopped.")
     else:
         execute_instructions()
         state.save()
-        print(f"\n💼 Script exécuté une seule fois. Total: {state.balance:.2f}$")
+        print(f"\n💼 Script executed once. Total: {state.balance:.2f}$")

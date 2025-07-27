@@ -1,13 +1,13 @@
 import os
 
 HELP = (
-    "Édite un fichier ligne par ligne."\
-    "\nExemple : edit monscript.cl"
+    "Edit a file line by line."\
+    "\nExample: edit myscript.cl"
 )
 
 def run(args, cli):
     if not args:
-        print("Utilisation : edit <nom_fichier>")
+        print("Usage: edit <filename>")
         return
 
     filename = args[0]
@@ -18,7 +18,7 @@ def run(args, cli):
         with open(path, "r", encoding="utf-8") as f:
             existing = f.read()
 
-    print("(Éditeur simplifié — terminez par une ligne vide)")
+    print("(Simple editor — finish with an empty line)")
     if existing:
         print(existing)
 
@@ -35,4 +35,4 @@ def run(args, cli):
     with open(path, "w", encoding="utf-8") as f:
         f.write("\n".join(lines))
 
-    print(f"{filename} sauvegardé.")
+    print(f"{filename} saved.")

@@ -1,14 +1,14 @@
 import os
 
-# Description utilisée par la commande "help".
+# Description used by the "help" command.
 HELP = (
-    "Affiche le contenu d'un fichier."\
-    "\nExemple : cat script.cl"
+    "Display the contents of a file."\
+    "\nExample: cat script.cl"
 )
 
 def run(args, cli):
     if not args:
-        print("Utilisation : cat <nom_fichier>")
+        print("Usage: cat <filename>")
         return
 
     filename = args[0]
@@ -18,9 +18,9 @@ def run(args, cli):
         with open(path, "r", encoding="utf-8") as f:
             content = f.read()
             if not content.strip():
-                print("(fichier vide)")
+                print("(empty file)")
             else:
                 print(f"📄 {filename}:\n")
                 print(content)
     else:
-        print(f"❌ Fichier introuvable : {filename}")
+        print(f"❌ File not found: {filename}")

@@ -2,33 +2,33 @@ import os
 import json
 
 HELP = (
-    "Affiche la boutique pour acheter outils et machines."\
-    "\nExemple : shop"
+    "Display the shop to buy tools and machines."\
+    "\nExample: shop"
 )
 
 SHOP_ITEMS = [
     {
-        "label": "Machine Linux v1",
+        "label": "Linux machine v1",
         "key": "vm_linux",
-        "desc": "Ajoute une machine virtuelle configurée en DHCP.",
+        "desc": "Adds a virtual machine configured with DHCP.",
         "cost": 25.00
     },
     {
-        "label": "Commande nmap",
+        "label": "nmap command",
         "key": "tool_nmap",
-        "desc": "Ajoute la commande 'nmap' pour scanner les machines.",
+        "desc": "Adds the 'nmap' command to scan machines.",
         "cost": 15.00
     },
     {
-        "label": "Commande ssh",
+        "label": "ssh command",
         "key": "tool_ssh",
-        "desc": "Permet de se connecter à une machine via 'ssh <nom>'.",
+        "desc": "Allows connecting to a machine via 'ssh <name>'.",
         "cost": 10.00
     },
     {
-        "label": "Module Idle",
+        "label": "Idle module",
         "key": "tool_idle",
-        "desc": "Autorise l'usage d'idle, jobs et stop pour lancer des scripts en arrière-plan.",
+        "desc": "Allows using idle, jobs and stop to run scripts in the background.",
         "cost": 50.00,
         "unlock": 200.0
     }
@@ -38,7 +38,7 @@ SHOP_ITEMS = [
 def run(args, cli):
     state = cli.state
 
-    print("\n🛍️ Boutique :\n")
+    print("\n🛍️ Shop:\n")
     available_items = [
         it for it in SHOP_ITEMS
         if it.get("unlock", 0) <= state.total_money_earned or it["key"] in state.inventory
@@ -49,47 +49,47 @@ def run(args, cli):
         print(f"{i}. {item['label']} - {item['cost']:.2f}$ {owned}")
         print(f"   {item['desc']}")
 
-    print("\nTapez le numéro de l'objet à acheter (ou 'q' pour quitter) : ", end="")
+    print("\nEnter the number of the item to buy (or 'q' to quit): ", end="")
     choice = input().strip().lower()
 
     if choice == "q":
-        print("🔙 Retour au terminal.")
+        print("🔙 Back to the terminal.")
         return
 
     if not choice.isdigit():
-        print("❌ Entrée invalide.")
+        print("❌ Invalid input.")
         return
 
     index = int(choice) - 1
     if index < 0 or index >= len(available_items):
-        print("❌ Numéro invalide.")
+        print("❌ Invalid number.")
         return
 
     item = available_items[index]
 
     if item["key"] in state.inventory and item["key"] != "vm_linux":
-        print("📦 Vous possédez déjà cet objet.")
+        print("📦 You already own this item.")
         return
 
     if state.balance < item["cost"]:
-        print("❌ Pas assez d’argent.")
+        print("❌ Not enough money.")
         return
 
-    # Achat validé
+    # Purchase confirmed
     state.balance -= item["cost"]
 
     if item["key"] == "vm_linux":
-        machine_name = input("🖥️ Donnez un nom à la machine : ").strip()
+        machine_name = input("🖥️ Give a name to the machine: ").strip()
         machine_ip = f"192.168.1.{len(state.machines) + 2}"
         machine_folder = os.path.join(cli.home_path, f"remote_{machine_name}")
         os.makedirs(machine_folder, exist_ok=True)
 
-        # Script par défaut
+        # Default script
         script_path = os.path.join(machine_folder, "money.cl")
         with open(script_path, "w", encoding="utf-8") as f:
-            f.write("# Script initial de la machine\n")
+            f.write("# Initial machine script\n")
 
-        # Préparer la config de la machine
+        # Prepare the machine configuration
         machine_data = {
             "name": machine_name,
             "ip": machine_ip,
@@ -106,20 +106,20 @@ def run(args, cli):
             "scripts": []
         }
 
-        # Sauvegarde initiale
+        # Initial save
         save_path = os.path.join(machine_folder, "save.json")
         with open(save_path, "w", encoding="utf-8") as f:
             json.dump(machine_data["state"], f, indent=2)
 
-        # Ajout dans la liste seulement après
+        # Add to the list only afterwards
         state.machines.append(machine_data)
 
-        print(f"✅ Machine '{machine_name}' ajoutée au réseau (IP : {machine_ip})")
+        print(f"✅ Machine '{machine_name}' added to the network (IP: {machine_ip})")
     else:
         state.inventory.append(item["key"])
-        print(f"✅ Vous avez acheté : {item['label']} !")
+        print(f"✅ You purchased: {item['label']}!")
         if item["key"] == "tool_idle":
-            print("Les commandes 'idle', 'jobs' et 'stop' sont maintenant disponibles.")
+            print("The commands 'idle', 'jobs' and 'stop' are now available.")
 
-    print(f"💸 Solde restant : {state.balance:.2f}$")
+    print(f"💸 Remaining balance: {state.balance:.2f}$")
     state.save()

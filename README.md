@@ -1,14 +1,14 @@
-# 🖥️ Clidle – Le jeu idle en terminal, pour hackers du futur
+# 🖥️ Clidle – The terminal idle game for future hackers
 
-**Clidle** est un *jeu textuel en ligne de commande (CLI)* où vous incarnez un hacker du futur, propulsé dans un terminal sécurisé et fictif. Votre mission ? Gagner un maximum d’argent virtuel à l’aide de scripts automatisés et d’un terminal évolutif.
+**Clidle** is a *command line idle game* where you play as a hacker of the future inside a secure fictional terminal. Your goal is to earn as much virtual money as possible using automated scripts and an upgradable terminal.
 
-🧠 Inspiré par les *idle games* et les *sandbox*, Clidle vous propose un environnement de simulation unique où chaque commande, chaque script, chaque amélioration vous rapproche de la richesse.
+🧠 Inspired by *idle games* and *sandbox* environments, Clidle offers a unique simulation where each command, script and upgrade brings you closer to wealth.
 
 ---
 
-## 🎮 Aperçu du gameplay
+## 🎮 Gameplay preview
 
-Vous commencez avec un fichier `money.cl` vide. Après un petit tutoriel interactif, vous découvrez la commande magique :
+You start with an empty `money.cl` file. After a short interactive tutorial you discover the magic command:
 
 ```cl
 while True:
@@ -16,7 +16,7 @@ while True:
     upgrade()
 ```
 
-Et là, tout commence...
+Then the game begins...
 
 ```bash
 main> ls
@@ -33,113 +33,113 @@ main> run money.cl
 💰 +0.01$ ...
 ```
 
-Améliorez votre machine, débloquez des commandes (`nmap`, `ssh`, `upgrade`, etc.), piratez des VM, achetez du matériel… et devenez le roi du terminal !
+Upgrade your machine, unlock commands (`nmap`, `ssh`, `upgrade`, etc.), hack VMs, buy hardware… and become the king of the terminal!
 
 ---
 
-## 🧰 Fonctionnalités actuelles
+## 🧰 Current features
 
-✅ Terminal sandboxé sécurisé (aucune commande système réelle)  
-✅ Tutoriel interactif au premier lancement  
-✅ Commandes simulées : `ls`, `cat`, `edit`, `run`, `create`, `shop`, `ssh`, `exit`, `upgrade`...
-✅ Module `idle` (et ses commandes `jobs`/`stop`) à acheter dans la boutique
-   (débloqué après avoir gagné 200$, coût de 50$)
-✅ Système de fichiers virtuel par utilisateur  
-✅ Scripts personnalisables en ClidleScript (`makeMoney()`, `upgrade()` etc.)
-✅ Gain d'argent automatisé avec `power` (vitesse) et `gain` (revenu par appel)  
-✅ Machines virtuelles distantes accessibles via `ssh <nom>`  
-✅ Boutique pour débloquer de nouvelles commandes et acheter du matériel  
-✅ Sauvegarde automatique de l'état du jeu (machine principale et VM)
+✅ Secure sandboxed terminal (no real system commands)
+✅ Interactive tutorial on first launch
+✅ Simulated commands: `ls`, `cat`, `edit`, `run`, `create`, `shop`, `ssh`, `exit`, `upgrade`...
+✅ `idle` module (with `jobs`/`stop` commands) to purchase in the shop (unlocked after earning $200, costs $50)
+✅ Per-user virtual filesystem
+✅ Customizable scripts in ClidleScript (`makeMoney()`, `upgrade()` etc.)
+✅ Automated money gain with `power` (speed) and `gain` (income per call)
+
+✅ Remote virtual machines accessible via `ssh <name>`
+✅ Shop to unlock new commands and buy hardware
+✅ Automatic save of game state (main machine and VMs)
 
 ---
 
-## 🛠️ Structure du projet
+## 🛠️ Project structure
 
 ```
 loocist23-clidle/
-├── main.py              # Lancement principal
-├── cli.py               # Moteur du terminal Clidle
-├── game_state.py        # État du jeu (argent, machines, améliorations…)
-├── tutorial.py          # Tutoriel guidé pour nouveaux joueurs
-├── commands/            # Toutes les commandes du jeu
-├── scriptfuncs/         # Fonctions appelables depuis les scripts (.cl)
-├── home/                # Système de fichiers du joueur (avec VM)
-└── README.md            # Ce fichier
+├── main.py              # Main entry point
+├── cli.py               # Clidle terminal engine
+├── game_state.py        # Game state (money, machines, upgrades…)
+├── tutorial.py          # Guided tutorial for new players
+├── commands/            # All game commands
+├── scriptfuncs/         # Functions callable from scripts (.cl)
+├── home/                # Player filesystem (with VMs)
+└── README.md            # This file
 ```
 
 ---
 
-## 🧪 Installation & Lancement
+## 🧪 Installation & launch
 
-1. **Pré-requis** : Python 3.10+  
-2. **Cloner le repo** :
+1. **Requirements**: Python 3.10+
+2. **Clone the repo**:
 
 ```bash
 git clone https://github.com/Loocist23/clidle.git
 cd clidle
 ```
 
-3. **Lancer le jeu** :
+3. **Start the game**:
 
 ```bash
 python main.py
 ```
 
-👩‍🏫 Le tutoriel s'affichera automatiquement la première fois.
+👩‍🏫 The tutorial will appear automatically the first time.
 
 ---
 
-## 💡 Quelques commandes utiles
+## 💡 Useful commands
 
-| Commande       | Description                                      |
-|----------------|--------------------------------------------------|
-| `help`         | Affiche toutes les commandes disponibles         |
-| `ls`           | Liste les fichiers de votre dossier virtuel      |
-| `cat`          | Affiche le contenu d’un fichier                  |
-| `edit`         | Modifie un fichier texte                         |
-| `run`          | Exécute un script `.cl` (ex: `money.cl`)         |
-| `idle`         | Lance un script en tâche de fond (après achat)   |
-| `jobs`         | Liste les scripts lancés avec `idle` (après achat) |
-| `stop <id>`    | Arrête un script en arrière-plan (après achat)     |
-| `create`       | Crée un nouveau script `.cl`                     |
-| `shop`         | Ouvre la boutique pour acheter des améliorations|
-| `ssh <nom>`    | Accède à une machine distante                    |
-| `upgrade`      | Améliore votre vitesse ou vos gains              |
-| `exit`         | Quitte le terminal ou la VM actuelle             |
-
----
-
-## 🚧 Roadmap (à venir)
-
-- Missions scénarisées
-- Virus et IA adverses
-- Dark CLI avec piratage de port
-- Leaderboard global (optionnel)
-- Générateur de scripts avancés
-- Système de réputation et réseau clandestin
+| Command        | Description                                       |
+|----------------|---------------------------------------------------|
+| `help`         | Display all available commands                     |
+| `ls`           | List files in your virtual folder                  |
+| `cat`          | Show a file’s content                              |
+| `edit`         | Edit a text file                                  |
+| `run`          | Execute a `.cl` script (e.g. `money.cl`)           |
+| `idle`         | Run a script in the background (after purchase)    |
+| `jobs`         | List scripts launched with `idle` (after purchase) |
+| `stop <id>`    | Stop a background script (after purchase)          |
+| `create`       | Create a new `.cl` script                          |
+| `shop`         | Open the shop to buy upgrades                      |
+| `ssh <name>`   | Connect to a remote machine                        |
+| `upgrade`      | Improve your speed or gains                        |
+| `exit`         | Leave the terminal or current VM                   |
 
 ---
 
-## 🧑‍💻 Développeur
+## 🚧 Roadmap (planned)
 
-👤 **Anthony Zegnal**  
-Alias [Loocist23](https://github.com/Loocist23)  
-Développeur fullstack, bidouilleur de scripts, créateur de jeux 🛠️
-
----
-
-## 📜 Licence
-
-Projet open-source sous licence **MIT** *(sous réserve de confirmation)*.  
-Les contributions sont les bienvenues !
+- Story missions
+- Viruses and enemy AIs
+- Dark CLI with port hacking
+- Optional global leaderboard
+- Advanced script generator
+- Reputation system and underground network
 
 ---
 
-## 🌟 À propos
+## 🧑‍💻 Developer
 
-Clidle est une ode aux nerds, aux terminaux et à l'automatisation.  
-Un jeu pour celles et ceux qui rêvent de gagner de l'argent… **à coups de ligne de commande**.
+👤 **Anthony Zegnal**
+Alias [Loocist23](https://github.com/Loocist23)
+Fullstack developer, script tinkerer and game creator 🛠️
 
 ---
 
-> 🧾 *"Hacker du futur cherche fortune dans les lignes du passé."*
+## 📜 License
+
+Open-source project released under the **MIT** license *(subject to confirmation)*.
+Contributions are welcome!
+
+---
+
+## 🌟 About
+
+Clidle is an ode to nerds, terminals and automation.
+A game for those who dream of earning money… **one command line at a time**.
+
+---
+
+> 🧾 *"Future hacker seeks fortune in the lines of the past."*

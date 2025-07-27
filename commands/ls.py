@@ -1,13 +1,13 @@
 import os
 
 HELP = (
-    "Liste les fichiers du dossier courant."\
-    "\nExemple : ls"
+    "List the files in the current folder."\
+    "\nExample: ls"
 )
 
 IGNORE_LIST = [
     "save.json",
-    # Ajoute ici d'autres fichiers ou dossiers à ignorer
+    # Add other files or folders to ignore here
 ]
 
 def run(args, cli):

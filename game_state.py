@@ -1,9 +1,8 @@
 import os
 import json
 
-# Par défaut, toutes les sauvegardes se trouvent dans le dossier
-# ``home`` à la racine du projet. Cela évite la création accidentelle
-# d'un fichier ``save.json`` supplémentaire à la racine du dépôt.
+# By default all saves are stored in the ``home`` folder at the project root.
+# This avoids accidentally creating another ``save.json`` at the repository root.
 SAVE_PATH = os.path.join(os.path.dirname(__file__), "home", "save.json")
 
 
@@ -35,10 +34,10 @@ class GameState:
                     data = json.load(f)
                     self.__dict__.update(data)
             except Exception as e:
-                print(f"⚠️ Erreur de chargement depuis {path} : {e}")
-                print("➡️ Valeurs par défaut utilisées.")
+                print(f"⚠️ Error loading from {path}: {e}")
+                print("➡️ Default values used.")
         else:
-            print(f"ℹ️ Aucun fichier de sauvegarde trouvé à {path}, initialisation par défaut.")
+            print(f"ℹ️ No save file found at {path}, using defaults.")
 
     def save(self, path=SAVE_PATH):
         try:
@@ -46,4 +45,4 @@ class GameState:
             with open(path, "w", encoding="utf-8") as f:
                 json.dump(self.__dict__, f, indent=2)
         except Exception as e:
-            print(f"❌ Erreur lors de la sauvegarde dans {path} : {e}")
+            print(f"❌ Error while saving to {path}: {e}")
