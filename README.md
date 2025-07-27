@@ -139,6 +139,8 @@ Contributions are welcome!
 Clidle is an ode to nerds, terminals and automation.
 A game for those who dream of earning money… **one command line at a time**.
 
+For a lore overview in English, see [docs/UNIVERSE.md](docs/UNIVERSE.md).
+
 ---
 
 > 🧾 *"Future hacker seeks fortune in the lines of the past."*
