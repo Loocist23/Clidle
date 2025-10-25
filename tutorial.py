@@ -2,7 +2,7 @@
 import os
 import time
 
-TUTORIAL_FLAG = ".tutorial_done"
+TUTORIAL_FLAG = os.path.join("home", ".tutorial_done")
 
 class ClidleTutorial:
     def __init__(self, fake_files):

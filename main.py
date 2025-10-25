@@ -17,6 +17,7 @@ BANNER = r"""
 fake_files = {
     "money.cl": ""
 }
+os.makedirs("home", exist_ok=True)
 
 def main():
     if not os.path.exists(TUTORIAL_FLAG):

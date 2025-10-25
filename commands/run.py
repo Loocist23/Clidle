@@ -7,6 +7,7 @@ HELP = (
     "\nExample: run myscript.cl"
 )
 
+
 def run(args, cli):
     if not args:
         print("Usage: run <filename>")
@@ -45,6 +46,8 @@ def run(args, cli):
     if is_loop:
         print("▶️ Running script (Ctrl+C to stop)")
         try:
+            if state.under_attack:
+                print("⚠️ Production bloquée (attaque IA en cours). Tape 'defend' pour rétablir.")
             while True:
                 execute_instructions()
                 print(f"\r💰 Total: {state.balance:.2f}$ (+{state.income_per_call:.2f}$/tick)", end="", flush=True)
