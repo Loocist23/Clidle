@@ -1,18 +1,27 @@
-name: CI
+name: CI + Release on push to main
 
 on:
   push:
     branches: [ main ]
-  pull_request:
+
+permissions:
+  contents: write   # requis pour pousser le tag et créer la release
+
+concurrency:
+  group: release-main
+  cancel-in-progress: false
 
 jobs:
   build:
+    name: Build (matrix)
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
         os: [ubuntu-latest, windows-latest]
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0  # on veut les tags pour plus tard
       - uses: actions/setup-python@v5
         with:
           python-version: '3.10'
@@ -26,3 +35,56 @@ jobs:
           name: clidle-${{ runner.os }}
           path: |
             dist/clidle*
+          if-no-files-found: error
+
+  release:
+    name: Create tag & GitHub Release (attach both assets)
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0  # indispensable pour voir l'historique des tags
+      - name: Determine next version (patch bump)
+        id: semver
+        shell: bash
+        run: |
+          set -euo pipefail
+          # récupère le dernier tag vX.Y.Z (sinon version de base 0.1.0)
+          LAST_TAG=$(git tag --list 'v*' | sort -V | tail -n1 || true)
+          if [[ -z "${LAST_TAG}" ]]; then
+            NEXT_TAG="v0.1.0"
+          else
+            V=${LAST_TAG#v}
+            IFS='.' read -r MAJ MIN PAT <<< "${V}"
+            PAT=$((PAT + 1))
+            NEXT_TAG="v${MAJ}.${MIN}.${PAT}"
+          fi
+          echo "last=${LAST_TAG}"   >> $GITHUB_OUTPUT
+          echo "next=${NEXT_TAG}"   >> $GITHUB_OUTPUT
+          echo "Next tag: ${NEXT_TAG}"
+      - name: Create and push git tag
+        if: steps.semver.outputs.last != steps.semver.outputs.next  # évite re-tag à l'identique
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git tag -a "${{ steps.semver.outputs.next }}" -m "Release ${{ steps.semver.outputs.next }}"
+          git push origin "${{ steps.semver.outputs.next }}"
+      - name: Download all build artifacts (Linux + Windows)
+        uses: actions/download-artifact@v4
+        with:
+          pattern: clidle-*
+          merge-multiple: true
+          path: artifacts
+      - name: List downloaded files (debug)
+        run: ls -laR artifacts
+      - name: Publish GitHub Release (attach both assets)
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: ${{ steps.semver.outputs.next }}
+          name: ${{ steps.semver.outputs.next }}
+          files: |
+            artifacts/*
+          generate_release_notes: true
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
