@@ -1,0 +1,12 @@
+[project]
+name = "clidle"
+version = "0.1.0"
+description = "Terminal idle game"
+readme = "README.md"
+requires-python = ">=3.10"
+
+[project.scripts]
+clidle = "main:main"
+
+[tool.ruff]
+line-length = 100
